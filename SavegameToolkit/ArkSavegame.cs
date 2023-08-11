@@ -112,7 +112,7 @@ namespace SavegameToolkit
         {
             SaveVersion = archive.ReadShort();
 
-            if (SaveVersion < 5 || SaveVersion > 9)
+            if (SaveVersion < 5 || SaveVersion > 11)
             {
                 throw new NotSupportedException("Found unknown Version " + SaveVersion);
             }
@@ -415,8 +415,11 @@ namespace SavegameToolkit
 
             var soulTrapContainer = new Dictionary<int, string>(); // used for cached lookup of owner
 
+            int ixx = 0;
             foreach (var cryo in cryopods)
             {
+                ixx++;
+                if (cryo.GetPropertyValue<IArkArray>("CustomItemDatas").Type == )
                 ArkArrayStruct customItemDatas = cryo.GetPropertyValue<IArkArray, ArkArrayStruct>("CustomItemDatas");
                 StructPropertyList customDinoData = (StructPropertyList)customItemDatas?.FirstOrDefault(cd => ((StructPropertyList)cd).GetTypedProperty<PropertyName>("CustomDataName").Value.Name == "Dino");
                 PropertyStruct customDataBytes = customDinoData?.Properties.FirstOrDefault(p => p.NameString == "CustomDataBytes") as PropertyStruct;
