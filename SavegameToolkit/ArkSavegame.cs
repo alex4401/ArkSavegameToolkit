@@ -117,6 +117,13 @@ namespace SavegameToolkit
                 throw new NotSupportedException("Found unknown Version " + SaveVersion);
             }
 
+            if (SaveVersion >= 11)
+            {
+                // Version 11 added eight 64-bit fields here: some unidentified pointers with nulls in-between. Some
+                // seem to tend to point at the end of the file.
+                archive.Position += 64;
+            }
+
             if (SaveVersion > 6)
             {
                 hibernationOffset = archive.ReadInt();
