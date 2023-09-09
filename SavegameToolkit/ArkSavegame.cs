@@ -121,6 +121,8 @@ namespace SavegameToolkit
         {
             SaveVersion = archive.ReadShort();
 
+            archive.SaveVersion = SaveVersion;
+
             if (SaveVersion < 5 || SaveVersion > 12)
             {
                 throw new NotSupportedException("Found unknown Version " + SaveVersion);
